@@ -5,23 +5,21 @@
              x:Class="TipCalculator.MainPage">
     <ScrollView>
 
-        <VerticalStackLayout
-            Padding="30,0"
-            Spacing="25">
-            <Label>Bill</Label>
-            <Entry x:Name="AmountEntry" Placeholder="Enter amount" TextChanged="AmountEntry_OnTextChanged" Keyboard="Numeric" />
-            <Label>Tip</Label>
-            <Label x:Name="TipLabel" Text="0.00" />
-            <Label>Total</Label>
-            <Label x:Name="TotalLabel" Text="0.00" />
-            <Label>Tip percentage</Label>
-            <Label x:Name="TipPercentageLabel" Text="15%"/>
-            <Slider x:Name="TipSlider" ValueChanged="TipSlider_OnValueChanged" Minimum="0" Maximum="100" />
-            <Button Text="15%" x:Name="FifteenPercentageButton" Clicked="FifteenPercentageButton_OnClicked" />
-            <Button Text="20%" x:Name="TwentyPercentageButton" Clicked="TwentyPercentageButton_OnClicked" />
-            <Button Text="Round down" x:Name="RoundDownButton" Clicked="RoundDownButton_OnClicked" />
-            <Button Text="Round up" x:Name="RoundUpButton" Clicked="RoundUpButton_OnClicked" />
-        </VerticalStackLayout>
+        <Grid ColumnDefinitions="*, *" RowDefinitions="*,*,*,7*,*,*,2*" ColumnSpacing="5" Padding="50" RowSpacing="5">
+            <Label VerticalOptions="Center" HorizontalOptions="Start">Bill</Label>
+            <Entry Grid.Column="1" x:Name="AmountEntry" Placeholder="Enter amount" TextChanged="AmountEntry_OnTextChanged" Keyboard="Numeric" />
+            <Label Grid.Row="1" HorizontalOptions="Start">Tip</Label>
+            <Label Grid.Row="1" Grid.Column="1" x:Name="TipLabel" Text="0.00" />
+            <Label Grid.Row="2" HorizontalOptions="Start">Total</Label>
+            <Label Grid.Row="2" Grid.Column="1" x:Name="TotalLabel" Text="0.00" />
+            <Label Grid.Row="3" HorizontalOptions="Start" VerticalOptions="End">Tip percentage</Label>
+            <Label Grid.Row="3" Grid.Column="1" VerticalOptions="End" HorizontalOptions="End" x:Name="TipPercentageLabel" Text="15%"/>
+            <Slider Grid.Row="4" Grid.ColumnSpan="2" x:Name="TipSlider" ValueChanged="TipSlider_OnValueChanged" Minimum="0" Maximum="100" />
+            <Button Grid.Row="5" Text="15%" x:Name="FifteenPercentageButton" Clicked="FifteenPercentageButton_OnClicked" />
+            <Button Grid.Row="5" Grid.Column="1" Text="20%" x:Name="TwentyPercentageButton" Clicked="TwentyPercentageButton_OnClicked" />
+            <Button Grid.Row="6" Text="Round down" x:Name="RoundDownButton" Clicked="RoundDownButton_OnClicked" />
+            <Button Grid.Row="6" Grid.Column="1" Text="Round up" x:Name="RoundUpButton" Clicked="RoundUpButton_OnClicked" />
+        </Grid>
     </ScrollView>
 
 </ContentPage>

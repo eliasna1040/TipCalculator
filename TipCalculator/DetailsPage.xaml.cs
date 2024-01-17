@@ -11,22 +11,15 @@ namespace TipCalculator;
 [QueryProperty(nameof(Person), nameof(Person))]
 public partial class DetailsPage : ContentPage
 {
-    Person person;
-    public Person Person
-    {
-        get => person;
-        set => person = value;
-    }
+    public Person? Person { set => BindingContext = value; }
 
     public DetailsPage()
     {
         InitializeComponent();
-        BindingContext = this;
     }
 
     private void GoBackButton_OnClicked(object? sender, EventArgs e)
     {
         Shell.Current.GoToAsync("..");
-        Debug.WriteLine(Person.Name);
     }
 }

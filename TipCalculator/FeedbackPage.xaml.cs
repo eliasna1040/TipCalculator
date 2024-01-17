@@ -15,6 +15,6 @@ public partial class FeedbackPage : ContentPage
 
     private async void GoBackButton_OnClicked(object? sender, EventArgs e)
     {
-        await Navigation.PopModalAsync();
+        await Shell.Current.GoToAsync(nameof(MainPage));
     }
 }

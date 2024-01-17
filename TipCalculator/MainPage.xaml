@@ -3,10 +3,6 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TipCalculator.MainPage">
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="About" x:Name="AboutMenuItem" Clicked="AboutMenuItem_OnClicked"/>
-        <ToolbarItem Text="Feedback" x:Name="FeedbackMenuItem" Clicked="FeedbackMenuItem_OnClicked"/>
-    </ContentPage.ToolbarItems>
     <ScrollView>
         <Grid ColumnDefinitions="*, *" RowDefinitions="*,*,*,7*,*,*,2*" ColumnSpacing="5" Padding="50" RowSpacing="5">
             <Label VerticalOptions="Center" HorizontalOptions="Start">Bill</Label>

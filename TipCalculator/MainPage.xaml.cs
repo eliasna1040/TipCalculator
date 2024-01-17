@@ -60,14 +60,4 @@ public partial class MainPage : ContentPage
         }
         
     }
-
-    private async void AboutMenuItem_OnClicked(object? sender, EventArgs e)
-    {
-        await Navigation.PushAsync(new AboutPage());
-    }
-
-    private async void FeedbackMenuItem_OnClicked(object? sender, EventArgs e)
-    {
-        await Navigation.PushModalAsync(new FeedbackPage());
-    }
 }

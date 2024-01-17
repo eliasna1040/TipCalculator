@@ -5,7 +5,7 @@ namespace TipCalculator;
 public partial class MainPage : ContentPage
 {
     private CultureInfo _currencyCulture;
-    
+
     public MainPage()
     {
         InitializeComponent();
@@ -15,9 +15,6 @@ public partial class MainPage : ContentPage
 
     #region EventHandlers
 
-    
-
-    
     private void AmountEntry_OnTextChanged(object? sender, TextChangedEventArgs e)
     {
         Calculate(false, false);
@@ -48,7 +45,7 @@ public partial class MainPage : ContentPage
     {
         SetTip(15);
     }
-    
+
     private async void CurrencyButton_OnClicked(object? sender, EventArgs e)
     {
         string currency = await DisplayActionSheet("Currency", "Cancel", null, "DKK", "EUR", "USD");
@@ -58,7 +55,7 @@ public partial class MainPage : ContentPage
             "EUR" => "de-DE",
             "USD" => "en-US",
             _ => "da-DK"
-        } ;
+        };
 
         _currencyCulture = CultureInfo.GetCultureInfo(type);
         Calculate(false, false);
@@ -68,13 +65,12 @@ public partial class MainPage : ContentPage
 
     #region Logic
 
-    
-
     private async void SetTip(double sliderValue)
     {
         double tipValue = double.TryParse(AmountEntry.Text, out double amount) ? CalculateTip(amount, sliderValue) : 0;
-        
-        if (await DisplayAlert("Tip", $"Do you want to pay a {tipValue.ToString("C", _currencyCulture)} tip", "Yes", "No"))
+
+        if (await DisplayAlert("Tip", $"Do you want to pay a {tipValue.ToString("C", _currencyCulture)} tip", "Yes",
+                "No"))
         {
             TipSlider.Value = sliderValue;
         }
@@ -84,7 +80,7 @@ public partial class MainPage : ContentPage
     {
         return Math.Round(tip, MidpointRounding.ToEven) / 100 * amount;
     }
-    
+
     private void Calculate(bool roundUp, bool roundDown)
     {
         double.TryParse(AmountEntry.Text, out double amount);
@@ -97,12 +93,13 @@ public partial class MainPage : ContentPage
         {
             amount = Math.Floor(amount / 10) * 10;
         }
-            
+
         double tip = CalculateTip(TipSlider.Value, amount);
         double totalAmount = amount > 0 ? amount + tip : 0;
-            
+
         TipLabel.Text = tip.ToString("C", _currencyCulture);
         TotalLabel.Text = totalAmount.ToString("C", _currencyCulture);
     }
+
     #endregion
 }

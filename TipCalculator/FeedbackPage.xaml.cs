@@ -13,8 +13,15 @@ public partial class FeedbackPage : ContentPage
         InitializeComponent();
     }
 
-    private async void GoBackButton_OnClicked(object? sender, EventArgs e)
+    private async void GoToDetailsButton_OnClicked(object? sender, EventArgs e)
     {
-        await Shell.Current.GoToAsync(nameof(MainPage));
+        ShellNavigationQueryParameters param = new()
+        {
+            { "Name", "Elias" },
+            { "Address", "Somewhere" },
+            { "Age", "19" },
+        };
+        
+        await Shell.Current.GoToAsync(nameof(DetailsPage), param);
     }
 }

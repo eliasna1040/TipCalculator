@@ -13,5 +13,5 @@
             ContentTemplate="{DataTemplate local:MainPage}"
             Route="MainPage" />
         <ShellContent Title="About" ContentTemplate="{DataTemplate local:AboutPage}" Icon="info.svg" />
-        <ShellContent Title="Feedback" ContentTemplate="{DataTemplate local:FeedbackPage}" Icon="feedback.svg" />
+        <ShellContent Title="Feedback" Route="FeedbackPage" ContentTemplate="{DataTemplate local:FeedbackPage}" Icon="feedback.svg" />
 </Shell>

@@ -5,6 +5,6 @@
              x:Class="TipCalculator.FeedbackPage">
     <StackLayout>
         <Label>This is Feedback Page</Label>
-        <Button Text="Go back" x:Name="GoBackButton" Clicked="GoBackButton_OnClicked" />
+        <Button Text="Go to Details" x:Name="GoToDetailsButton" Clicked="GoToDetailsButton_OnClicked" />
     </StackLayout>
 </ContentPage>

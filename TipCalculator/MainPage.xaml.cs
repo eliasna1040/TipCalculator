@@ -15,10 +15,7 @@ public partial class MainPage : ContentPage
 
     #region EventHandlers
 
-    private void AmountEntry_OnTextChanged(object? sender, TextChangedEventArgs e)
-    {
-        Calculate(false, false);
-    }
+    private void AmountEntry_OnTextChanged(object? sender, TextChangedEventArgs e) => Calculate(false, false);
 
     private void TipSlider_OnValueChanged(object? sender, ValueChangedEventArgs e)
     {
@@ -26,38 +23,25 @@ public partial class MainPage : ContentPage
         Calculate(false, false);
     }
 
-    private void RoundUpButton_OnClicked(object? sender, EventArgs e)
-    {
-        Calculate(true, false);
-    }
+    private void RoundUpButton_OnClicked(object? sender, EventArgs e) => Calculate(true, false);
 
-    private void RoundDownButton_OnClicked(object? sender, EventArgs e)
-    {
-        Calculate(false, true);
-    }
+    private void RoundDownButton_OnClicked(object? sender, EventArgs e) => Calculate(false, true);
 
-    private async void TwentyPercentageButton_OnClicked(object? sender, EventArgs e)
-    {
-        SetTip(20);
-    }
+    private async void TwentyPercentageButton_OnClicked(object? sender, EventArgs e) => await SetTip(20);
 
-    private async void FifteenPercentageButton_OnClicked(object? sender, EventArgs e)
-    {
-        SetTip(15);
-    }
+    private async void FifteenPercentageButton_OnClicked(object? sender, EventArgs e) => await SetTip(15);
 
     private async void CurrencyButton_OnClicked(object? sender, EventArgs e)
     {
         string currency = await DisplayActionSheet("Currency", "Cancel", null, "DKK", "EUR", "USD");
-        string type = currency switch
+
+        _currencyCulture = CultureInfo.GetCultureInfo(currency switch
         {
             "DKK" => "da-DK",
             "EUR" => "de-DE",
             "USD" => "en-US",
             _ => "da-DK"
-        };
-
-        _currencyCulture = CultureInfo.GetCultureInfo(type);
+        });
         Calculate(false, false);
     }
 
@@ -65,7 +49,7 @@ public partial class MainPage : ContentPage
 
     #region Logic
 
-    private async void SetTip(double sliderValue)
+    private async Task SetTip(double sliderValue)
     {
         double tipValue = double.TryParse(AmountEntry.Text, out double amount) ? CalculateTip(amount, sliderValue) : 0;
 
@@ -76,26 +60,27 @@ public partial class MainPage : ContentPage
         }
     }
 
-    private double CalculateTip(double amount, double tip)
-    {
-        return Math.Round(tip, MidpointRounding.ToEven) / 100 * amount;
-    }
+    private double CalculateTip(double amount, double tip) => Math.Round(tip, MidpointRounding.ToEven) / 100 * amount;
 
     private void Calculate(bool roundUp, bool roundDown)
     {
-        double.TryParse(AmountEntry.Text, out double amount);
+        double tip = 0;
 
-        if (roundUp)
+        if (double.TryParse(AmountEntry.Text, out double amount))
         {
-            amount = Math.Ceiling(amount / 10) * 10;
-        }
-        else if (roundDown)
-        {
-            amount = Math.Floor(amount / 10) * 10;
-        }
+            if (roundUp)
+            {
+                amount = Math.Ceiling(amount / 10) * 10;
+            }
+            else if (roundDown)
+            {
+                amount = Math.Floor(amount / 10) * 10;
+            }
 
-        double tip = CalculateTip(TipSlider.Value, amount);
-        double totalAmount = amount > 0 ? amount + tip : 0;
+            tip = CalculateTip(TipSlider.Value, amount);
+        }
+        
+        double totalAmount = amount + tip;
 
         TipLabel.Text = tip.ToString("C", _currencyCulture);
         TotalLabel.Text = totalAmount.ToString("C", _currencyCulture);

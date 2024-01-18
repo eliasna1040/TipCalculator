@@ -6,18 +6,28 @@
     <ScrollView>
         <Grid ColumnDefinitions="*, *" RowDefinitions="*,*,*,7*,*,*,*,*" ColumnSpacing="5" Padding="50" RowSpacing="5">
             <Label VerticalOptions="Center" HorizontalOptions="Start">Bill</Label>
-            <Entry Grid.Column="1" x:Name="AmountEntry" Placeholder="Enter amount" Text="{Binding BillAmount}" TextChanged="AmountEntry_OnTextChanged" Keyboard="Numeric" />
+            <Entry Grid.Column="1" x:Name="AmountEntry" Placeholder="Enter amount" Text="{Binding BillAmount}"
+                   TextChanged="AmountEntry_OnTextChanged" Keyboard="Numeric" />
+
             <Label Grid.Row="1" HorizontalOptions="Start">Tip</Label>
-            <Label Grid.Row="1" Grid.Column="1" x:Name="TipLabel" Text="{Binding TipAmount}" />
+            <Label Grid.Row="1" Grid.Column="1" x:Name="TipLabel" Text="{Binding TipAmount, StringFormat='{0:C}'}" />
+
             <Label Grid.Row="2" HorizontalOptions="Start">Total</Label>
-            <Label Grid.Row="2" Grid.Column="1" x:Name="TotalLabel" Text="{Binding TotalAmount}" />
+            <Label Grid.Row="2" Grid.Column="1" x:Name="TotalLabel" Text="{Binding TotalAmount, StringFormat='{0:C}'}" />
+
             <Label Grid.Row="3" HorizontalOptions="Start" VerticalOptions="End">Tip percentage</Label>
-            <Label Grid.Row="3" Grid.Column="1" VerticalOptions="End" HorizontalOptions="End" x:Name="TipPercentageLabel" Text="{Binding TipPercentage}"/>
-            <Slider Grid.Row="4" Grid.ColumnSpan="2" x:Name="TipSlider" ValueChanged="TipSlider_OnValueChanged" Value="{Binding TipPercentage}" Minimum="0" Maximum="100" />
-            <Button Grid.Row="5" Text="15%" x:Name="FifteenPercentageButton" Clicked="FifteenPercentageButton_OnClicked" />
-            <Button Grid.Row="5" Grid.Column="1" Text="20%" x:Name="TwentyPercentageButton" Clicked="TwentyPercentageButton_OnClicked" />
+            <Label Grid.Row="3" Grid.Column="1" VerticalOptions="End" HorizontalOptions="End"
+                   x:Name="TipPercentageLabel" Text="{Binding TipPercentage, StringFormat='{0:F0}%'}" />
+            <Slider Grid.Row="4" Grid.ColumnSpan="2" x:Name="TipSlider" ValueChanged="TipSlider_OnValueChanged"
+                    Value="{Binding TipPercentage}" Minimum="0" Maximum="100" />
+
+            <Button Grid.Row="5" Text="15%" x:Name="FifteenPercentageButton"
+                    Clicked="FifteenPercentageButton_OnClicked" />
+            <Button Grid.Row="5" Grid.Column="1" Text="20%" x:Name="TwentyPercentageButton"
+                    Clicked="TwentyPercentageButton_OnClicked" />
             <Button Grid.Row="6" Text="Round down" x:Name="RoundDownButton" Clicked="RoundDownButton_OnClicked" />
-            <Button Grid.Row="6" Grid.Column="1" Text="Round up" x:Name="RoundUpButton" Clicked="RoundUpButton_OnClicked" />
+            <Button Grid.Row="6" Grid.Column="1" Text="Round up" x:Name="RoundUpButton"
+                    Clicked="RoundUpButton_OnClicked" />
             <Button Grid.Row="7" Text="Currency" x:Name="CurrencyButton" Clicked="CurrencyButton_OnClicked" />
         </Grid>
     </ScrollView>

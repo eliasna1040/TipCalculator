@@ -11,13 +11,7 @@ public partial class MainPage : ContentPage
     public MainPage()
     {
         InitializeComponent();
-        Tip = new Tip()
-        {
-            TotalAmount = "0",
-            BillAmount = 0,
-            TipPercentage = 0,
-            CurrencyCulture = CultureInfo.GetCultureInfo("da-DK")
-        };
+        Tip = new Tip();
         BindingContext = Tip;
     }
 
@@ -39,7 +33,7 @@ public partial class MainPage : ContentPage
     {
         string currency = await DisplayActionSheet("Currency", "Cancel", null, "DKK", "EUR", "USD");
 
-        Tip.CurrencyCulture = CultureInfo.GetCultureInfo(currency switch
+        var _currencyCulture = CultureInfo.GetCultureInfo(currency switch
         {
             "DKK" => "da-DK",
             "EUR" => "de-DE",

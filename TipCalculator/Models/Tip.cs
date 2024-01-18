@@ -1,31 +1,54 @@
+using System.ComponentModel;
 using System.Globalization;
+using System.Runtime.CompilerServices;
 
 namespace TipCalculator.Models;
 
-public class Tip
+public class Tip : INotifyPropertyChanged
 {
-    private double billAmount;
+    private double _billAmount = 0;
+    private double _totalAmount = 0;
+    private double _tipPercentage = 0;
+
     public double BillAmount
     {
-        get => billAmount;
-        set => billAmount = double.TryParse(value.ToString(), out double amount) ? amount : 0;
-    }
-
-    public double TipAmount
-    {
-        get
+        get => _billAmount;
+        set
         {
-            return Math.Round(TipPercentage, MidpointRounding.ToEven) / 100 * BillAmount;
+            _billAmount = double.TryParse(value.ToString(), out double amount) ? amount : 0;
+            OnPropertyChanged();
+            OnPropertyChanged(nameof(TipAmount));
         }
     }
 
-    public string TotalAmount { get; set; }
-    public double TipPercentage { get; set; }
-    public CultureInfo CurrencyCulture { get; set; }
-    
+    public double TipAmount => Math.Round(TipPercentage, MidpointRounding.ToEven) / 100 * BillAmount;
+
+    public double TotalAmount
+    {
+        get => _totalAmount;
+        set
+        {
+            if (value == _totalAmount) return;
+            _totalAmount = value;
+            OnPropertyChanged();
+        }
+    }
+
+    public double TipPercentage
+    {
+        get => _tipPercentage;
+        set
+        {
+            if (value.Equals(_tipPercentage)) return;
+            _tipPercentage = value;
+            OnPropertyChanged();
+            OnPropertyChanged(nameof(TipAmount));
+        }
+    }
+
     public void Calculate(bool roundUp, bool roundDown)
     {
-        double amount = 0;
+        double amount = BillAmount;
         
         if (roundUp)
         {
@@ -36,8 +59,13 @@ public class Tip
             amount = Math.Floor(BillAmount / 10) * 10;
         }
 
-        double tipAmount = amount + TipAmount;
+        TotalAmount = amount + TipAmount;
+    }
 
-        TotalAmount = tipAmount.ToString(CurrencyCulture);
+    public event PropertyChangedEventHandler? PropertyChanged;
+
+    protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }

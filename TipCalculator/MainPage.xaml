@@ -2,18 +2,18 @@
 
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="TipCalculator.MainPage">
+             x:Class="TipCalculator.MainPage" xmlns:models="clr-namespace:TipCalculator.Models" x:DataType="models:Tip">
     <ScrollView>
         <Grid ColumnDefinitions="*, *" RowDefinitions="*,*,*,7*,*,*,*,*" ColumnSpacing="5" Padding="50" RowSpacing="5">
             <Label VerticalOptions="Center" HorizontalOptions="Start">Bill</Label>
-            <Entry Grid.Column="1" x:Name="AmountEntry" Placeholder="Enter amount" TextChanged="AmountEntry_OnTextChanged" Keyboard="Numeric" />
+            <Entry Grid.Column="1" x:Name="AmountEntry" Placeholder="Enter amount" Text="{Binding BillAmount}" TextChanged="AmountEntry_OnTextChanged" Keyboard="Numeric" />
             <Label Grid.Row="1" HorizontalOptions="Start">Tip</Label>
-            <Label Grid.Row="1" Grid.Column="1" x:Name="TipLabel" Text="0.00" />
+            <Label Grid.Row="1" Grid.Column="1" x:Name="TipLabel" Text="{Binding TipAmount}" />
             <Label Grid.Row="2" HorizontalOptions="Start">Total</Label>
-            <Label Grid.Row="2" Grid.Column="1" x:Name="TotalLabel" Text="0.00" />
+            <Label Grid.Row="2" Grid.Column="1" x:Name="TotalLabel" Text="{Binding TotalAmount}" />
             <Label Grid.Row="3" HorizontalOptions="Start" VerticalOptions="End">Tip percentage</Label>
-            <Label Grid.Row="3" Grid.Column="1" VerticalOptions="End" HorizontalOptions="End" x:Name="TipPercentageLabel" Text="15%"/>
-            <Slider Grid.Row="4" Grid.ColumnSpan="2" x:Name="TipSlider" ValueChanged="TipSlider_OnValueChanged" Minimum="0" Maximum="100" />
+            <Label Grid.Row="3" Grid.Column="1" VerticalOptions="End" HorizontalOptions="End" x:Name="TipPercentageLabel" Text="{Binding TipPercentage}"/>
+            <Slider Grid.Row="4" Grid.ColumnSpan="2" x:Name="TipSlider" ValueChanged="TipSlider_OnValueChanged" Value="{Binding TipPercentage}" Minimum="0" Maximum="100" />
             <Button Grid.Row="5" Text="15%" x:Name="FifteenPercentageButton" Clicked="FifteenPercentageButton_OnClicked" />
             <Button Grid.Row="5" Grid.Column="1" Text="20%" x:Name="TwentyPercentageButton" Clicked="TwentyPercentageButton_OnClicked" />
             <Button Grid.Row="6" Text="Round down" x:Name="RoundDownButton" Clicked="RoundDownButton_OnClicked" />

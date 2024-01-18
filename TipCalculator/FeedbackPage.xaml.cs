@@ -19,7 +19,7 @@ public partial class FeedbackPage : ContentPage
         ShellNavigationQueryParameters param = new()
         {
             {
-                "Person", new Person()
+                nameof(DetailsPage.Person), new Person()
                 {
                     Name = "Elias",
                     Address = "Somewhere",

@@ -15,7 +15,7 @@ public class Tip : INotifyPropertyChanged
         get => _billAmount;
         set
         {
-            _billAmount = double.TryParse(value.ToString(), out double amount) ? amount : 0;
+            _billAmount = value;
             OnPropertyChanged();
             OnPropertyChanged(nameof(TipAmount));
         }

@@ -2,15 +2,18 @@
 
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="TipCalculator.MainPage" xmlns:models="clr-namespace:TipCalculator.Models" x:DataType="models:Tip">
+             x:Class="TipCalculator.MainPage" 
+             xmlns:models="clr-namespace:TipCalculator.Models" 
+             x:DataType="models:Tip"
+             xmlns:converters="clr-namespace:TipCalculator.Converters">
     <ScrollView>
         <Grid ColumnDefinitions="*, *" RowDefinitions="*,*,*,7*,*,*,*,*" ColumnSpacing="5" Padding="50" RowSpacing="5">
             <Label VerticalOptions="Center" HorizontalOptions="Start">Bill</Label>
-            <Entry Grid.Column="1" x:Name="AmountEntry" Placeholder="Enter amount" Text="{Binding BillAmount}"
+            <Entry Grid.Column="1" x:Name="AmountEntry" Placeholder="Enter amount" Text="{Binding BillAmount, Converter={converters:AmountConverter}}"
                    TextChanged="AmountEntry_OnTextChanged" Keyboard="Numeric" />
 
             <Label Grid.Row="1" HorizontalOptions="Start">Tip</Label>
-            <Label Grid.Row="1" Grid.Column="1" x:Name="TipLabel" Text="{Binding TipAmount, StringFormat='{0:C}'}" />
+            <Label Grid.Row="1" Grid.Column="1" x:Name="TipLabel" Text="{Binding TipAmount, StringFormat='{0:C}', Converter={converters:TipConverter}}" />
 
             <Label Grid.Row="2" HorizontalOptions="Start">Total</Label>
             <Label Grid.Row="2" Grid.Column="1" x:Name="TotalLabel" Text="{Binding TotalAmount, StringFormat='{0:C}'}" />

@@ -8,17 +8,17 @@
              xmlns:converters="clr-namespace:TipCalculator.Converters">
     <ScrollView>
         <Grid ColumnDefinitions="*, *" RowDefinitions="*,*,*,7*,*,*,*,*" ColumnSpacing="5" Padding="50" RowSpacing="5">
-            <Label VerticalOptions="Center" HorizontalOptions="Start">Bill</Label>
+            <Label Style="{StaticResource InfoLabel}" VerticalOptions="Center" HorizontalOptions="Start">Bill</Label>
             <Entry Grid.Column="1" x:Name="AmountEntry" Placeholder="Enter amount" Text="{Binding BillAmount, Converter={converters:AmountConverter}}"
                    TextChanged="AmountEntry_OnTextChanged" Keyboard="Numeric" />
 
-            <Label Grid.Row="1" HorizontalOptions="Start">Tip</Label>
-            <Label Grid.Row="1" Grid.Column="1" x:Name="TipLabel" Text="{Binding TipAmount, StringFormat='{0:C}', Converter={converters:TipConverter}}" />
+            <Label Style="{StaticResource InfoLabel}" Grid.Row="1" HorizontalOptions="Start">Tip</Label>
+            <Label Style="{StaticResource CurrencyLabel}" TextColor="{Binding TipAmount, Converter={converters:ColorConverter}}" Grid.Row="1" Grid.Column="1" x:Name="TipLabel" Text="{Binding TipAmount, StringFormat='{0:C}', Converter={converters:TipConverter}}" />
 
-            <Label Grid.Row="2" HorizontalOptions="Start">Total</Label>
-            <Label Grid.Row="2" Grid.Column="1" x:Name="TotalLabel" Text="{Binding TotalAmount, StringFormat='{0:C}'}" />
+            <Label Style="{StaticResource InfoLabel}" Grid.Row="2" HorizontalOptions="Start">Total</Label>
+            <Label Style="{StaticResource CurrencyLabel}" TextColor="{Binding TotalAmount, Converter={converters:ColorConverter}}" Grid.Row="2" Grid.Column="1" x:Name="TotalLabel" Text="{Binding TotalAmount, StringFormat='{0:C}'}" />
 
-            <Label Grid.Row="3" HorizontalOptions="Start" VerticalOptions="End">Tip percentage</Label>
+            <Label Style="{StaticResource InfoLabel}" Grid.Row="3" HorizontalOptions="Start" VerticalOptions="End">Tip percentage</Label>
             <Label Grid.Row="3" Grid.Column="1" VerticalOptions="End" HorizontalOptions="End"
                    x:Name="TipPercentageLabel" Text="{Binding TipPercentage, StringFormat='{0:F0}%'}" />
             <Slider Grid.Row="4" Grid.ColumnSpan="2" x:Name="TipSlider" ValueChanged="TipSlider_OnValueChanged"

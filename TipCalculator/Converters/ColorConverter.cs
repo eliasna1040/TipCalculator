@@ -2,11 +2,11 @@ using System.Globalization;
 
 namespace TipCalculator.Converters;
 
-public class NegativeConverter : IValueConverter, IMarkupExtension
+public class ColorConverter : IValueConverter, IMarkupExtension
 {
     public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
-        return value != null && !value.ToString().Contains('-') ? value : 0;
+        return (double)(value ?? 0) == 0 ? "Red" : "Green";
     }
 
     public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
